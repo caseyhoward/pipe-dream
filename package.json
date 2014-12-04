@@ -1,0 +1,23 @@
+{
+  "name": "pipe-dream",
+  "version": "0.1.0",
+  "description": "Pipes only exist in dreams.",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "keywords": [
+    "gulp",
+    "vinyl",
+    "vinyl-source-stream"
+  ],
+  "author": "Casey Howard",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-mocha": "^2.0.0",
+    "guzzle": "0.0.3",
+    "merge-stream": "^0.1.6",
+    "mocha": "^2.0.1"
+  }
+}
