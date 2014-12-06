@@ -4,7 +4,7 @@
   "description": "Pipes only exist in dreams.",
   "main": "index.js",
   "scripts": {
-    "test": "gulp"
+    "test": "gulp --harmony"
   },
   "keywords": [
     "gulp",
@@ -14,10 +14,15 @@
   "author": "Casey Howard",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "^3.8.10",
+    "chai": "^1.10.0",
+    "gulp-concat": "^2.4.2",
+    "gulp-debug": "^1.0.1",
     "gulp-mocha": "^2.0.0",
     "guzzle": "0.0.3",
     "merge-stream": "^0.1.6",
     "mocha": "^2.0.1"
+  },
+  "dependencies": {
+    "harmony-proxy": "0.0.2"
   }
 }
