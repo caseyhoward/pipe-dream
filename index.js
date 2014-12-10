@@ -1,10 +1,14 @@
 var Proxy = require('harmony-proxy');
 var gulp = require('gulp');
+var GulpPluginRegistry = require('./src/gulp_plugin_registry');
 
-module.exports = function(globString, options) {
-  var gulpPluginRegistry = GulpPluginRegistry();
-  var gulpPluginRunner = new GulpPluginRunner(globString, options, gulpPluginRegistry);
+module.exports = pipeDream;
+
+function pipeDream(globString, options) {
   var object = {};
+  var gulpPluginRegistry = new GulpPluginRegistry(options);
+  var gulpPluginRunner = new GulpPluginRunner(globString, options, gulpPluginRegistry);
+  pipeDream.registry = gulpPluginRegistry;
 
   var proxy = new Proxy(object, {
     get: function(target, name, receiver) {
@@ -20,7 +24,6 @@ module.exports = function(globString, options) {
   return proxy;
 };
 
-
 function GulpPluginRunner(source, options, gulpPluginRegistry) {
   var stream = gulp.src(source);
 
@@ -32,24 +35,6 @@ function GulpPluginRunner(source, options, gulpPluginRegistry) {
       } else {
         throw 'Failed to run ' + name + ' plugin';
       }
-    }
-  };
-};
-
-function GulpPluginRegistry(options) {
-  var plugins = {};
-  plugins.dest = gulp.dest;
-  options = options || {};
-
-  return {
-    get: function(name) {
-      var gulpPluginName = 'gulp-' + name;
-      var shouldAttemptToInstall;
-
-      if (!plugins[name]) {
-        plugins[name] = require(gulpPluginName);
-      }
-      return plugins[name];
     }
   };
 };
