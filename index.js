@@ -1,6 +1,6 @@
 var Proxy = require('harmony-proxy');
-var gulp = require('gulp');
 var GulpPluginRegistry = require('./src/gulp_plugin_registry');
+var GulpPluginRunner = require('./src/gulp_plugin_runner');
 
 module.exports = pipeDream;
 
@@ -22,19 +22,4 @@ function pipeDream(globString, options) {
   });
 
   return proxy;
-};
-
-function GulpPluginRunner(source, options, gulpPluginRegistry) {
-  var stream = gulp.src(source);
-
-  return {
-    run: function run(name, arguments) {
-      var gulpPlugin = gulpPluginRegistry.get(name);
-      if (gulpPlugin) {
-        stream = stream.pipe(gulpPlugin.apply(null, arguments));
-      } else {
-        throw 'Failed to run ' + name + ' plugin';
-      }
-    }
-  };
 };
