@@ -18,6 +18,7 @@ module.exports = function GulpPluginRegistry(options) {
         try {
           plugins[name] = require(gulpPluginName);
         } catch (error) {
+          console.log(error);
           if (typeof options.autoInstall === 'undefined') {
             shouldAttemptToInstall = promptUserToInstall(gulpPluginName, function() {
 
