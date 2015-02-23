@@ -13,7 +13,7 @@ function GulpPluginRunner(source, options, gulpPluginRegistry) {
             stream = stream.pipe(gulpPlugin.apply(null, pluginArguments));
           } catch (error) {
             console.error(error);
-            throw '';
+            throw error;
           }
         } else {
           throw 'Failed to run ' + name + ' plugin';

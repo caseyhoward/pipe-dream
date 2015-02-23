@@ -22,7 +22,6 @@ function pipeDream(globString, options) {
         if (name === 'then') return;
 
         lastCommand = lastCommand.then(function() {
-          console.log(name, pluginArguments);
           return gulpPluginRunner.run(name, pluginArguments);
         });
         return proxy;
