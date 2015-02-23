@@ -1,13 +1,11 @@
-var guzzle = require('guzzle');
 var gulp = require('gulp');
-
-guzzle.register('mocha');
+var mocha = require('gulp-mocha');
 
 gulp.task('default', function() {
-  guzzle.src('spec/**/*.spec.js', {read: false}).mocha();
+  gulp.src('spec/**/*.spec.js', {read: false}).pipe(mocha());
 });
 
-guzzle.task('watch', ['default'], function() {
+gulp.task('watch', ['default'], function() {
   gulp.watch(['spec/**/*.js'], ['default']);
   gulp.watch(['src/**/*.js'], ['default']);
 });
