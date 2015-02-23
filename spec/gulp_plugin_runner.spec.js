@@ -26,6 +26,7 @@ describe('GulpPluginRunner', function() {
     });
 
     it('runs gulp plugins', function(done) {
+      this.timeout = 10000;
       gulpPluginRunner.run('concat', ['all.js']);
       gulpPluginRunner.run('dest', ['tmp/']);
       Promise.all([concatPluginPromise, destPluginPromise]).then(function() {
