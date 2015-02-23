@@ -1,53 +1,30 @@
 var gulp = require('gulp');
+var Promise = require('es6-promise').Promise;
 
-function promptUserToInstall(gulpPluginName) {
-  console.log(gulpPluginName + ' not installed. Install now? (Y/n)');
-}
-
-function installNpmModule(moduleName) {
-  var npm = require("npm");
-  npm.load(function (err) {
-    npm.commands.install([moduleName], function (er, data) {
-      // log the error or data
-    });
-    npm.on("log", function (message) {
-      console.log(message);
-    });
-  });
-}
-
-module.exports = function GulpPluginRegistry(options) {
+module.exports = function GulpPluginRegistry(npmModuleInstaller, requireFunction) {
   var plugins = {};
   plugins.dest = gulp.dest;
-  options = options || {};
 
   return {
     get: function(name) {
       var gulpPluginName = 'gulp-' + name;
-      var shouldAttemptToInstall;
 
-      if (!plugins[name]) {
-        try {
-          plugins[name] = require(gulpPluginName);
-        } catch (error) {
-          console.log(error);
-          if (typeof options.autoInstall === 'undefined') {
-            shouldAttemptToInstall = promptUserToInstall(gulpPluginName, function() {
-
+      var promise = new Promise(function(resolve, reject) {
+        if (plugins[name]) {
+          resolve(plugins[name]);
+        } else {
+          try {
+            plugins[name] = requireFunction(gulpPluginName);
+            resolve(plugins[name]);
+          } catch (error) {
+            npmModuleInstaller.install(gulpPluginName).then(function(plugin) {
+              plugins[name] = plugin;
+              resolve(plugins[name]);
             });
-          } else {
-            shouldAttemptToInstall = options['autoInstall'];
-          }
-          if (shouldAttemptToInstall) {
-            installNpmModule(gulpPluginName);
-            plugins[name] = require(gulpPluginName);
           }
         }
-      }
-      return plugins[name];
-    },
-    remove: function(name) {
-      plugins[name] = undefined;
+      });
+      return promise;
     }
   };
 };
