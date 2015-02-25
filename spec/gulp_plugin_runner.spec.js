@@ -10,6 +10,8 @@ describe('GulpPluginRunner', function() {
   var gulpPluginRegistry, gulpPluginRunner, concatPluginPromise, destPluginPromise, concatPluginResolve, destPluginResolve;
 
   describe('#run', function() {
+    this.timeout(10000);
+
     beforeEach(function() {
       var source = './spec/test-app/assets/**/*.js';
       var options = {};
@@ -25,16 +27,29 @@ describe('GulpPluginRunner', function() {
       gulpPluginRegistry.get.withArgs('dest').returns(destPluginPromise);
     });
 
-    it('runs gulp plugins', function(done) {
-      this.timeout = 10000;
-      gulpPluginRunner.run('concat', ['all.js']);
-      gulpPluginRunner.run('dest', ['tmp/']);
-      Promise.all([concatPluginPromise, destPluginPromise]).then(function() {
-        expect(fs.readFileSync('tmp/all.js').toString()).to.equal('1\n\n2\n');
+    afterEach(function(done) {
+      fs.unlink('tmp/all.js', function() {
         done();
       });
+    });
+
+    it('runs gulp plugins', function(done) {
+      gulpPluginRunner.run('concat', ['all.js']).then(function() {
+        return gulpPluginRunner.run('dest', ['tmp/']);
+      }).then(function() {
+        Promise.all([concatPluginPromise, destPluginPromise]).then(function() {
+          // TODO: Get rid of this setTimeout
+          setTimeout(function() {
+            fs.readFile('tmp/all.js', function(error, data) {
+              if (error) console.log(error);
+              expect(data.toString()).to.equal('1\n\n2\n');
+              done();
+            });
+          }, 1000);
+        });
+      });
       concatPluginResolve(require('gulp-concat'));
-      destPluginResolve(require('gulp').dest);
+      destPluginResolve(gulp.dest);
     });
   });
 });
