@@ -22,3 +22,7 @@ function GulpPluginRunner(source, options, gulpPluginRegistry) {
     }
   };
 };
+
+GulpPluginRunner.create = function(source, options, gulpPluginRegistry) {
+  return new GulpPluginRunner(source, options, gulpPluginRegistry);
+};
