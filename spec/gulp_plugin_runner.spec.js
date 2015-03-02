@@ -34,8 +34,8 @@ describe('GulpPluginRunner', function() {
     });
 
     it('runs gulp plugins', function(done) {
-      gulpPluginRunner.run('concat', ['all.js']).then(function() {
-        return gulpPluginRunner.run('dest', ['tmp/']);
+      gulpPluginRunner.run(['concat'], ['all.js']).then(function() {
+        return gulpPluginRunner.run(['dest'], ['tmp/']);
       }).then(function() {
         Promise.all([concatPluginPromise, destPluginPromise]).then(function() {
           // TODO: Get rid of this setTimeout

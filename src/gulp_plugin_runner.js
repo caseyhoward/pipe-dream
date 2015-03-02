@@ -6,18 +6,9 @@ function GulpPluginRunner(source, options, gulpPluginRegistry) {
   var stream = gulp.src(source);
 
   return {
-    run: function run(name, pluginArguments) {
-      return gulpPluginRegistry.get(name).then(function(gulpPlugin) {
-        if (gulpPlugin) {
-          try {
-            stream = stream.pipe(gulpPlugin.apply(null, pluginArguments));
-          } catch (error) {
-            console.error(error);
-            throw error;
-          }
-        } else {
-          throw 'Failed to run ' + name + ' plugin';
-        }
+    run: function run(pluginPath, pluginArguments) {
+      return gulpPluginRegistry.get(pluginPath[0]).then(function(gulpPlugin) {
+        stream = stream.pipe(gulpPlugin.apply(null, pluginArguments));
       });
     }
   };
