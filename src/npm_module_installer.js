@@ -6,7 +6,7 @@ function NpmModuleInstaller() {
   this.install = function install(moduleName) {
     var npm = require("npm");
     return new Promise(function(resolve, reject) {
-      npm.load(function(error) {
+      npm.load({"save-dev": true}, function(error) {
         if (error) {
           reject(error);
         } else {

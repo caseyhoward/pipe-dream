@@ -30,7 +30,7 @@ describe('GulpPluginRegistry', function() {
       });
     });
 
-    it('returns attempts to install non existing plugins', function(done) {
+    it('attempts to install non existing plugins', function(done) {
       var somePlugin = 'some plugin';
       var installPromise = new Promise(function(resolve, reject) {
         installResolve = resolve;
