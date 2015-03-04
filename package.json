@@ -12,6 +12,11 @@
     "vinyl",
     "vinyl-source-stream"
   ],
+  "homepage": "https://github.com/caseyhoward/pipe-dream",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/caseyhoward/pipe-dream.git"
+  },
   "author": "Casey Howard",
   "license": "MIT",
   "devDependencies": {
