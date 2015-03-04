@@ -34,7 +34,7 @@ gulp.task('scripts', function() {
 
 ### After
 
-``` js
+```js
 var gulp = require('gulp');
 var pipeDream = require('pipe-dream');
 
@@ -47,4 +47,57 @@ gulp.task('scripts', function() {
     .concat('all.min.js')
     .dest('dist');
 });
+```
+
+### Running gulp
+
+Unfortunately, gulp must be ran with the --harmony flag. This is pretty annoying and I would like to come up with a solution. Ideas would be appreciated.
+
+
+```
+  gulp --harmony scripts
+```
+
+Calling other methods is also supported (including pipe)
+```js
+var coffee = require('gulp-coffee');
+
+gulp.task('scripts', function() {
+  return pipeDream(paths.scripts)
+    .pipe(coffee())
+    .on('error', function() {
+      console.log('kaboom');
+    })
+    .concat('all.min.js')
+    .dest('dist');
+});
+```
+
+However, this means that plugins like gulp-pipe, gulp-on, etc
+
+Here is a current list functions that exist on a gulp source stream
+```
+ * _read
+ * _transform
+ * _write
+ * addListener
+ * destroy
+ * emit
+ * end
+ * listeners
+ * on
+ * once
+ * pause
+ * pipe
+ * push
+ * read
+ * removeAllListeners
+ * removeListener
+ * resume
+ * setEncoding
+ * setMaxListeners
+ * unpipe
+ * unshift
+ * wrap
+ * write
 ```
