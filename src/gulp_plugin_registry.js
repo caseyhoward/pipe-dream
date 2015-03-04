@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var Promise = require('es6-promise').Promise;
+var prompt = require('prompt');
 
 module.exports = function GulpPluginRegistry(npmModuleInstaller, requireFunction) {
   var plugins = {};
@@ -17,10 +18,24 @@ module.exports = function GulpPluginRegistry(npmModuleInstaller, requireFunction
             plugins[name] = requireFunction(gulpPluginName);
             resolve(plugins[name]);
           } catch (error) {
-            npmModuleInstaller.install(gulpPluginName).then(function(plugin) {
-              plugins[name] = plugin;
-              resolve(plugins[name]);
-            }, reject)
+            prompt.start();
+
+            prompt.get({
+              properties: {
+                install: {
+                  description: (gulpPluginName + ' not installed. Install now (Y/n)').green
+                }
+              }
+            }, function (err, result) {
+              if (result.install === 'y' || result.install === 'Y' || result.install === '') {
+                npmModuleInstaller.install(gulpPluginName).then(function(plugin) {
+                  plugins[name] = plugin;
+                  resolve(plugins[name]);
+                }, reject)
+              } else {
+                throw error;
+              }
+            });
           }
         }
       });
