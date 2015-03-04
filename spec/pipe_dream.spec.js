@@ -7,7 +7,7 @@ var denodify = require('lie-denodify');
 var copy = denodify(require('ncp').ncp);
 
 function runTest(preinstalledPlugins, done) {
-  preinstalledPlugins.unshift('install', 'gulp', 'harmony-proxy', 'es6-promise');
+  preinstalledPlugins.unshift('install', 'gulp', 'harmony-proxy', 'es6-promise', 'lodash');
   temp.mkdir('pipe-dream', function(error, temporaryDirectoryPath) {
     var appPath = temporaryDirectoryPath + '/test-app';
     copy('./spec/test-app', appPath).then(function() {
