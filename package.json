@@ -8,6 +8,7 @@
   },
   "keywords": [
     "gulp",
+    "gulpfriendly",
     "vinyl",
     "vinyl-source-stream"
   ],
