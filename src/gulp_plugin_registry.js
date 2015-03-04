@@ -20,7 +20,7 @@ module.exports = function GulpPluginRegistry(npmModuleInstaller, requireFunction
             npmModuleInstaller.install(gulpPluginName).then(function(plugin) {
               plugins[name] = plugin;
               resolve(plugins[name]);
-            });
+            }, reject)
           }
         }
       });

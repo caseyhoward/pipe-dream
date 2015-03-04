@@ -2,18 +2,19 @@ var gulp = require('gulp');
 
 module.exports = GulpPluginRunner;
 
-function GulpPluginRunner(source, options, gulpPluginRegistry) {
+function GulpPluginRunner(source, options, functionChainApplier, gulpPluginRegistry) {
   var stream = gulp.src(source);
 
   return {
     run: function run(pluginPath, pluginArguments) {
       return gulpPluginRegistry.get(pluginPath[0]).then(function(gulpPlugin) {
-        stream = stream.pipe(gulpPlugin.apply(null, pluginArguments));
+        var gulpPluginResult = functionChainApplier.applyOnObject(gulpPlugin, pluginPath.slice(1), pluginArguments);
+        stream = stream.pipe(gulpPluginResult);
       });
     }
   };
 };
 
-GulpPluginRunner.create = function(source, options, gulpPluginRegistry) {
-  return new GulpPluginRunner(source, options, gulpPluginRegistry);
+GulpPluginRunner.create = function(source, options, functionChainApplier, gulpPluginRegistry) {
+  return new GulpPluginRunner(source, options, functionChainApplier, gulpPluginRegistry);
 };
