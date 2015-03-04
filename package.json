@@ -19,6 +19,7 @@
     "fs-extra": "^0.13.0",
     "gulp": "^3.8.11",
     "gulp-mocha": "^2.0.0",
+    "gulp-util": "^3.0.4",
     "lie-denodify": "^0.3.0",
     "mocha": "^2.0.1",
     "npm": "^2.1.14",
