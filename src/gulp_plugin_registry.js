@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var Promise = require('es6-promise').Promise;
+var _ = require('lodash');
 
 module.exports = function GulpPluginRegistry(npmModuleInstaller, requireFunction) {
   var plugins = {};
@@ -7,7 +8,8 @@ module.exports = function GulpPluginRegistry(npmModuleInstaller, requireFunction
 
   return {
     get: function(name) {
-      var gulpPluginName = 'gulp-' + name;
+      var dashedName = _.snakeCase(name).replace(/_/, '-');
+      var gulpPluginName = 'gulp-' + dashedName;
 
       var promise = new Promise(function(resolve, reject) {
         if (plugins[name]) {

@@ -24,7 +24,7 @@ describe('GulpPluginRegistry', function() {
     it('returns plugins that are installed', function(done) {
       var somePlugin = 'some plugin';
       requireStub.withArgs('gulp-some-plugin').returns(somePlugin);
-      gulpPluginRegistry.get('some-plugin').then(function(actualSomePlugin) {
+      gulpPluginRegistry.get('somePlugin').then(function(actualSomePlugin) {
         expect(actualSomePlugin).to.equal(somePlugin);
         done();
       });
