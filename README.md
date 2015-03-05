@@ -51,12 +51,17 @@ gulp.task('scripts', function() {
 
 ### Running gulp
 
-Unfortunately, gulp must be ran with the --harmony flag. This is pretty annoying and I would like to come up with a solution. Ideas would be appreciated.
-
+Unfortunately, gulp must be ran with the --harmony flag. This is due to the use of the new Proxy class. This is pretty annoying and I would like to come up with a solution. Ideas would be appreciated.
 
 ```
   gulp --harmony scripts
 ```
+
+One idea is alias gulp in your bashrc:
+```
+alias gulp='gulp --harmony'
+```
+However, this isn't the best idea since its global
 
 Calling other methods is also supported (including pipe)
 ```js
