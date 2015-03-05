@@ -1,6 +1,6 @@
 {
   "name": "pipe-dream",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pipes only exist in dreams.",
   "main": "index.js",
   "scripts": {
