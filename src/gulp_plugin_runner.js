@@ -3,9 +3,7 @@ var _ = require('lodash');
 
 module.exports = GulpPluginRunner;
 
-function GulpPluginRunner(source, options, functionChainApplier, gulpPluginRegistry) {
-  var stream = gulp.src(source);
-
+function GulpPluginRunner(stream, options, functionChainApplier, gulpPluginRegistry) {
   return {
     run: function run(pluginPath, pluginArguments) {
       if (_.isFunction(stream[pluginPath[0]])) {

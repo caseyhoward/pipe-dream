@@ -14,7 +14,7 @@ describe('GulpPluginRunner', function() {
     this.timeout(10000);
 
     beforeEach(function() {
-      var source = './spec/test-app/assets/**/*.js';
+      var source = gulp.src('./spec/test-app/assets/**/*.js');
       var options = {};
       concatPluginPromise = new Promise(function(resolve, reject) {
         concatPluginResolve = resolve;

@@ -10,7 +10,7 @@ module.exports = PipeDreamCreator;
 function PipeDreamCreator(gulpPluginRegistry, functionChainApplier, streamProxyCreator) {
   streamProxyCreator = streamProxyCreator || new StreamProxyCreator();
   this.create = function(globString, options) {
-    gulpPluginRunner = GulpPluginRunner.create(globString, options, functionChainApplier, gulpPluginRegistry);
+    gulpPluginRunner = GulpPluginRunner.create(gulp.src(globString), options, functionChainApplier, gulpPluginRegistry);
     return streamProxyCreator.create(function(callChain, callArguments) {
       // if (callChain[callChain.length - 1] !== 'then') {
         return gulpPluginRunner.run(callChain, callArguments);
