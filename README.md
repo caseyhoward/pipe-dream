@@ -1,10 +1,13 @@
+## Warning
+There is a pretty [major bug](https://github.com/caseyhoward/pipe-dream/issues/1) that needs to be fixed before I can recommend using this.
+
 ## Installation
 ```sh
 npm install --save-dev pipe-dream
 ```
 
 ## Purpose
-The main objective is make gulp tasks easier to write and read by getting rid of some of the noise
+The main objective is make using gulp more efficient and less verbose.
 
 ## Features
 * Automatically requiring gulp plugins
@@ -106,3 +109,7 @@ Here is a current list functions that exist on a gulp source stream
  * wrap
  * write
 ```
+
+## Related Projects
+* [gulp-pipe](https://github.com/blakelapierre/gulp-pipe) - Aims to solve the problem of having "pipe" everywhere in a different way. I takes an array containing the glob that gulp.src takes as the first element and the rest of the elements are the gulp plugins to be applied
+* [gulp-load-plugins](https://github.com/jackfranklin/gulp-load-plugins) - Automatically loads gulp plugins in your package.json as properties on a single object.
