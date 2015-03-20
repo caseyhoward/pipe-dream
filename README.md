@@ -111,5 +111,5 @@ Here is a current list functions that exist on a gulp source stream
 ```
 
 ## Related Projects
-* [gulp-pipe](https://github.com/blakelapierre/gulp-pipe) - Aims to solve the problem of having "pipe" everywhere in a different way. I takes an array containing the glob that gulp.src takes as the first element and the rest of the elements are the gulp plugins to be applied
-* [gulp-load-plugins](https://github.com/jackfranklin/gulp-load-plugins) - Automatically loads gulp plugins in your package.json as properties on a single object.
+* [gulp-pipe](https://github.com/blakelapierre/gulp-pipe) - Solves the problem of having "pipe" everywhere. It takes an array containing the glob that gulp.src takes as the first element and the rest of the elements are the gulp plugins to be applied.
+* [gulp-load-plugins](https://github.com/jackfranklin/gulp-load-plugins) - Solves the problem of having to require gulp plugins. It automatically loads gulp plugins in your package.json as properties on a single object.
